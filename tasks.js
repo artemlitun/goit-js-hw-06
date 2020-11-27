@@ -26,9 +26,9 @@ import users from "./users.js";
 
 // Task 4
 
-// const getInactiveUsers = users =>  users.filter(user => user.isActive);
+const getInactiveUsers = users =>  users.filter(user => user.isActive === false);
 
-// console.log(getInactiveUsers(users));
+console.log(getInactiveUsers(users));
 
 
 // Task 5
@@ -59,10 +59,17 @@ import users from "./users.js";
 
 // const getUsersWithFriend = (users, friendName) =>
 // users.filter(user => user.friends.some(friend => friend === friendName))
-//     .map(user => user.name);
+//         .map(user => user.name);
+    
 
-// console.log(getUsersWithFriend(users, "Briana Decker"));
-// console.log(getUsersWithFriend(users, "Goldie Gentry"));
+const getUsersWithFriend = (users, friendName) => {
+    return users.filter(({ friends }) => friends.includes(friendName))
+        .map(({ name }) => name)
+}
+        
+console.log(getUsersWithFriend(users, "Briana Decker"));
+console.log(getUsersWithFriend(users, "Goldie Gentry"));
+
 
 
 // Task 9
@@ -74,14 +81,22 @@ import users from "./users.js";
 
 // console.log(getNamesSortedByFriendsCount(users));
 
+const getNamesSortedByFriendsCount = users => {
+    return [...users]
+        .sort(({ friends: a }, { friends: b }) => 
+    {return a.length - b.length})
+    .map(({name}) => name)
+  }
+  
+  console.log(getNamesSortedByFriendsCount(users));
 
 // Task 10
 
-// const getSortedUniqueSkills = users => 
-// users
-//   .map(user=>user.skills)
-//   .reduce((allSkills, user) => [...allSkills, ...user], [])
-//   .filter((elem, index, array) => array.indexOf(elem) === index)
-//   .sort((b, a) => b.localeCompare(a, 'culpa'));
+const getSortedUniqueSkills = users => 
+users
+  .map(user=>user.skills)
+  .reduce((allSkills, user) => [...allSkills, ...user], [])
+  .filter((elem, index, array) => array.indexOf(elem) === index)
+  .sort();
  
-// console.log(getSortedUniqueSkills(users));
+console.log(getSortedUniqueSkills(users));
